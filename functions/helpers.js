@@ -23,7 +23,7 @@ function getBoundingBox(vertices) {
     }
   
     return {
-      tl: { x: ceil(minX), y: ceil(minY) },
+      tl: { x: floor(minX), y: floor(minY) },
       br: { x: ceil(maxX), y: ceil(maxY) },
     };
   }
@@ -42,4 +42,40 @@ function getBoundingBox(vertices) {
     const range = random(ranges);
     const num = random(range[0], range[1]);
     return num;
-  }   
+  } 
+
+
+function shuffleInPlace(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = floor(random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+function simplifyVectors(vectors, n) {
+  if (n >= vectors.length || n <= 0) {
+    console.log("n >= len or n <= 0");
+    return vectors;
+  }
+
+  while (vectors.length > n) {
+    let shortestDistance = Infinity;
+    let rmIdx = -1;
+    for (let i = 0; i < vectors.length - 1; i++) {
+      let distance = vectors[i].dist(vectors[i + 1]);
+      if (distance < shortestDistance) {
+        shortestDistance = distance;
+        rmIdx = i;
+      }
+    }
+
+    if (rmIdx !== -1) {
+      let lerped = p5.Vector.lerp(vectors[rmIdx], vectors[rmIdx + 1], 0.5);
+    
+      vectors.splice(rmIdx, 2);
+      vectors.splice(rmIdx, 0, lerped);
+    }
+  }
+
+  return vectors;
+}
