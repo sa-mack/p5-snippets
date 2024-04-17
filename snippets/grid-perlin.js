@@ -1,6 +1,7 @@
 function setup() {
-    const minDim = min(windowWidth, windowHeight);
-    createCanvas(minDim, minDim);
+    const dimensionless = min(windowWidth, windowHeight);
+    createCanvas(dimensionless, dimensionless);
+    angleMode(DEGREES)
     background(0);
     stroke(255);
     let sf = 0.005;

@@ -5,8 +5,8 @@ class PoissonGrid {
       this.cellSize = r / sqrt(2);
       this.r = r;
       this.k = k;
-      this.cols = floor(region.width / cellSize);
-      this.rows = floor(region.height / cellSize);
+      this.cols = floor(region.gridW / this.cellSize);
+      this.rows = floor(region.gridH / this.cellSize);
       this.cells = new Array(this.cols * this.rows).fill(undefined);
       this.active = [];
       this.pts = []
@@ -41,8 +41,8 @@ class PoissonGrid {
     }
     generateSamples() {
         let x0 = createVector(
-            random(this.region.xStart, this.region.xStart + this.region.width),
-            random(this.region.yStart, this.region.yStart + this.region.height)
+            random(this.region.xStart, this.region.xStart + this.region.gridW),
+            random(this.region.yStart, this.region.yStart + this.region.gridH)
           );
           this.insert(x0);
           this.active.push(x0);

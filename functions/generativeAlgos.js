@@ -57,3 +57,27 @@ function chaikin(vertices, numPasses) {
     return lerped;
   }
   
+  function getPoles(pts) {
+    let north =  pts[0];
+    let south =  pts[0];
+    let east =  pts[0];
+    let west =  pts[0];
+
+    for (let i = 0; i < pts.length; i++) {
+      if (pts[i].y <= north.y) {
+        north = pts[i];
+      }
+       if (pts[i].y >= south.y) {
+        south = pts[i];
+      }
+      if (pts[i].x <= west.x) {
+        west = pts[i];
+      }
+      if (pts[i].x >= east.x) {
+        east = pts[i];
+      }
+    }
+    return {
+      north, south, east, west
+    }
+  }
