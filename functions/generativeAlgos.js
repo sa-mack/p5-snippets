@@ -13,7 +13,62 @@ function chaikin(vertices, numPasses) {
     }
     return vertices;
   }
-
+  function recursiveGrid(tl, br, depth, rects = []) {
+    if (depth <= 0) {
+      return;
+    }
+    let w = br.x - tl.x;
+    let h = br.y - tl.y;
+  
+    let direction; //0 vert, 1 horiz
+    if (w > h) {
+      direction = 0;
+    } else if (h > w) {
+      direction = 1;
+    } else {
+      direction = floor(random(2));
+    }
+    let firstTL;
+    let firstBR;
+    let secondTL;
+    let secondBR;
+  
+    if (direction == 0) {
+      let nextW = floor(random(w * 0.35, w * 0.65));
+      firstTL = tl;
+      firstBR = createVector(floor(tl.x + nextW), br.y);
+      secondTL = createVector(floor(tl.x + nextW), tl.y);
+      secondBR = br;
+    } else {
+      let nextH = floor(random(h * 0.35, h * 0.65));
+      firstTL = tl;
+      firstBR = createVector(br.x, floor(tl.y + nextH));
+      secondTL = createVector(tl.x, floor(tl.y + nextH));
+      secondBR = br;
+    }
+  
+    let skipChance = floor(random(5));
+  
+    if (depth > 2 && skipChance == 0) {
+      depth -= random([1, 2]);
+    }
+  
+    recursiveGrid(firstTL, firstBR, depth - 1, rects);
+    recursiveGrid(secondTL, secondBR, depth - 1, rects);
+  
+    if (depth == 1) {
+      rects.push({tl: firstTL, 
+                  tr: createVector(firstBR.x, firstTL.y),
+                  br: firstBR,
+                  bl: createVector(firstTL.x, firstBR.y)},
+                 
+                 {tl: secondTL,
+                  tr: createVector(secondBR.x, secondTL.y),
+                  br: secondBR,
+                 bl: createVector(secondTL.x, secondBR.y)});
+    }
+    return rects;
+  }
 
   function convexHull(points) {
     if (points.length < 3) return points;

@@ -86,3 +86,76 @@ function replaceColor(hexPalette) {
       : null;
   }
   
+
+
+
+  //refactor for easier use (pass remainColor as hex?) (why didn't noise work?)
+  // rn, pass remainColor as []. hexToRGB returns annoying object
+  
+
+  function chaosReplacer(remainColor, colorOptions) {
+    const RGBPalette = [];
+  console.log(remainColor)
+    for (let i = 0; i < colorOptions.length; i++) {
+      RGBPalette.push(hexToRGB(colorOptions[i]));
+    }
+  
+    loadPixels();
+  
+    for (let i = 0; i < pixels.length; i += 4) {
+      const r = pixels[i];
+      const g = pixels[i + 1];
+      const b = pixels[i + 2];
+      if (
+        r == remainColor[0] &&
+        g == remainColor[1] &&
+        b == remainColor[2]
+      ) {
+      continue;
+      }
+      
+      let clr = random(RGBPalette)
+      
+      
+  
+      
+      pixels[i] = clr.r;
+      pixels[i + 1] = clr.g;
+      pixels[i + 2] = clr.b;
+      
+  
+    }
+  
+    updatePixels();
+  }
+
+  function replaceOne(replaceColor, colorOptions) {
+    const RGBPalette = [];
+    for (let i = 0; i < colorOptions.length; i++) {
+      RGBPalette.push(hexToRGB(colorOptions[i]));
+    }
+  
+    loadPixels();
+  
+    for (let i = 0; i < pixels.length; i += 4) {
+      const r = pixels[i];
+      const g = pixels[i + 1];
+      const b = pixels[i + 2];
+      if (
+        r == replaceColor[0] &&
+        g == replaceColor[1] &&
+        b == replaceColor[2]
+      ) {
+        let clr = random(RGBPalette);
+
+        pixels[i] = clr.r;
+        pixels[i + 1] = clr.g;
+        pixels[i + 2] = clr.b;
+      }
+      
+  
+    }
+  
+    updatePixels();
+  }
+
