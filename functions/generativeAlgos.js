@@ -13,6 +13,24 @@ function chaikin(vertices, numPasses) {
     }
     return vertices;
   }
+
+
+  function chaikinOpen(vertices, numPasses) {
+    while (numPasses > 0) {
+      let chaikined = [];
+      for (let i = 1; i < vertices.length; i++) {
+        let startPt = vertices[i - 1];
+        let endPt = vertices[i];
+        let firstPt = p5.Vector.lerp(startPt, endPt, 0.25);
+        let secondPt = p5.Vector.lerp(startPt, endPt, 0.75);
+        chaikined.push(firstPt, secondPt);
+      }
+      vertices = chaikined;
+      numPasses--;
+    }
+    return vertices;
+  }
+
   function recursiveGrid(tl, br, depth, rects = []) {
     if (depth <= 0) {
       return;

@@ -86,8 +86,15 @@ function replaceColor(hexPalette) {
       : null;
   }
   
-
-
+  function hexToRGBArray(hx) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hx);
+    return result ? [
+          parseInt(result[1], 16),
+          parseInt(result[2], 16),
+          parseInt(result[3], 16),
+        ]
+      : null;
+  }
 
   //refactor for easier use (pass remainColor as hex?) (why didn't noise work?)
   // rn, pass remainColor as []. hexToRGB returns annoying object

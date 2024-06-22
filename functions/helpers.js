@@ -26,7 +26,7 @@ function inRect(pt, tl, br) {
 }
 
 
-function addMargin(bounds, m) {
+function shrinkBounds(bounds, m) {
   if (bounds.tl.x + m > bounds.tr.x - m) {
     console.log("too small")
     return bounds;
