@@ -27,4 +27,18 @@ class Grid {
   lookup(rowIdx, colIdx) {
     return this.rows[rowIdx][colIdx];
   }
+  debug() {
+    push();
+    noFill();
+    stroke("#ffffff")
+    for (let i = 0; i < this.rows.length; i++) {
+        for (let j = 0; j < this.rows[i].length; j++) {
+          let cell = this.rows[i][j]
+            rect(cell.tl.x, cell.tl.y, cell.br.x, cell.br.y);
+          console.log(cell)
+            text(`${i}, ${j}`, cell.tl.x, cell.br.y);
+        }
+    }
+      pop();
+  }
 }

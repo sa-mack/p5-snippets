@@ -21,6 +21,12 @@ function shuffleInPlace(array) {
 }
 
 
+function sortByDist(pts, target) {
+  return pts.sort((a, b) => {
+    return dist(a.x, a.y, target.x, target.y) - dist(b.x, b.y, target.x, target.y);
+  });
+}
+
 function inRect(pt, tl, br) {
   return pt.x < br.x && pt.x > tl.x && pt.y < br.y && pt.y > tl.y;
 }

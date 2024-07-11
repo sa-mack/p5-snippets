@@ -75,6 +75,11 @@ function chaikin(vertices, numPasses) {
     recursiveGrid(secondTL, secondBR, depth - 1, rects);
   
     if (depth == 1) {
+
+      //require Boundary class
+    //  rects.push(new Boundary(firstTL, firstBR), new Boundary(secondTL, secondBR))
+
+
       rects.push({tl: firstTL, 
                   tr: createVector(firstBR.x, firstTL.y),
                   br: firstBR,
