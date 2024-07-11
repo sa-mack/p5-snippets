@@ -99,3 +99,10 @@ class PoissonGrid {
     }
   }
 }
+
+
+function inEllipse(sample, center, rx, ry) {
+  let dx = (sample.x - center.x) / rx;
+  let dy = (sample.y - center.y) / ry;
+  return dx * dx + dy * dy <= 1;
+}
