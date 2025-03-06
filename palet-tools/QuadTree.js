@@ -1,27 +1,4 @@
-let CELLS = [];
-function setup() {
-  createCanvas(800, 800);
-  background(220);
-  rectMode(CORNERS);
-  ellipseMode(RADIUS);
-  angleMode(DEGREES);
-  fill(0);
-  
-  let TL = createVector(0, 0);
-  let BR = createVector(width, height);
-  let qt = new QuadTree(TL, BR, 1); 
-  let r = 400;
-  let randomPt = createVector(random(width), random(height));
-  for (let i = 0; i < 100; i++) {
-    let a = floor(random(360));
-    let x = randomPt.x + cos(a) * random(r);
-    let y = randomPt.y + sin(a) * random(r);
-    qt.insert(createVector(x, y));
-  }
-  qt.drawCells(1);
-  let ARR = [];
-  qt.occupiedCellsArray(ARR);
-}
+// fix return arr
 
 class QuadTree {
   constructor(tl, br, capacity) {
@@ -115,21 +92,5 @@ class QuadTree {
     this.br = new QuadTree(BR.tl, BR.br, this.capacity);
     this.bl = new QuadTree(BL.tl, BL.br, this.capacity);
     this.divided = true;
-  }
-}
-
-class Boundary {
-  constructor(tl, br) {
-    this.tl = tl;
-    this.br = br;
-    this.w = br.x - tl.x;
-    this.h = br.y - tl.y;
-  }
-  
-  contains(pt) {
-    return (pt.x > this.tl.x &&
-            pt.x < this.br.x &&
-            pt.y > this.tl.y &&
-            pt.y < this.br.y);
   }
 }

@@ -50,19 +50,6 @@ class KDTree {
       }
     }
   }
-
-  occupiedCellsArray(depth = 0) {
-    let arr = []
-    if (this.divided) {
-      
-      this.left.occupiedCellsArray(arr, depth + 1);
-      this.right.occupiedCellsArray(arr, depth + 1);
-    } else if (!this.divided && this.pts.length > 0) {
-//console.log(this.pts)
-      arr.push(this.bounds)
-    }
-    return arr;
-  }
  getCells(depth = 0) {
     let arr = [];
     if (!this.divided) {
@@ -101,14 +88,5 @@ class KDTree {
   }
 }
 
-class Boundary {
-  constructor(tl, br) {
-    this.tl = tl;
-    this.br = br;
-  }
 
-  contains(pt) {
-    return (pt.x >= this.tl.x && pt.x <= this.br.x && pt.y >= this.tl.y && pt.y <= this.br.y);
-  }
-}
 

@@ -96,8 +96,6 @@ function replaceColor(hexPalette) {
       : null;
   }
 
-  //refactor for easier use (pass remainColor as hex?) (why didn't noise work?)
-  // rn, pass remainColor as []. hexToRGB returns annoying object
   
 
   function chaosReplacer(remainColor, colorOptions) {
